@@ -22,7 +22,7 @@ public class App {
     @Test
     public void test(){
         WebDriver webDriver=WebDriverUtil.getChromeInstance();
-        String cookies="SINAGLOBAL=8536031385833.094.1530268775015; _ga=GA1.2.2011972251.1540370499; _gid=GA1.2.1558380449.1540370499; _s_tentry=-; Apache=1422264394367.4363.1540434315759; ULV=1540434315773:9:6:3:1422264394367.4363.1540434315759:1540389981825; login_sid_t=889cd427aac54c9df5c2b9f09926e706; cross_origin_proto=SSL; UOR=,,login.sina.com.cn; SUB=_2A2521V11DeRhGeBN7VET8CbEzzuIHXVVo8m9rDV8PUNbmtBeLRXwkW9NRFpZOBxCIMkm-vCeTaO1RbL7GlF-aclK; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFGjjLCJjiEfSbiG3L6F35a5JpX5KzhUgL.Foq0SoeEehnRShM2dJLoIES3qgSui--ciKLhi-2Ri--fi-2Xi-zXi--Xi-iWi-iWeo5pS7tt; SUHB=0nlu7YDVQoxjux; ALF=1571971236; SSOLoginState=1540435237; wvr=6";
+        String cookies="**********************此处马赛克*********************";
         Map<String, String> cookieMap = HttpclientUtil.convertJsonToMap(cookies);
 
         webDriver.get(SinaWeiboConstant.HOME_PAGE);
