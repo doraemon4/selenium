@@ -2,14 +2,17 @@ package com.stephen.learning.util;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
+import java.util.HashMap;
 
 /**
  * @Auther: jack
@@ -18,14 +21,25 @@ import java.io.File;
  */
 public class WebDriverUtil {
     public static WebDriver getChromeInstance(){
-        DesiredCapabilities capabilities=new DesiredCapabilities();
+        //设置下载路径
+        String downloadsPath = "/tmp/file/facebook";
+        HashMap<String, Object> chromePrefs = new HashMap();
+        chromePrefs.put("download.default_directory", downloadsPath);
+
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-web-security");
-        options.addArguments("--disable-infobars");
+        options.setExperimentalOption("prefs", chromePrefs);
+        //options.addArguments("--proxy-server=http://" + "150.109.167.161:8888");
+        DesiredCapabilities capabilities=new DesiredCapabilities();
+        Proxy proxy = new Proxy();
+        proxy.setHttpProxy("150.109.167.161:8888");
+        capabilities.setCapability(CapabilityType.ForSeleniumServer.AVOIDING_PROXY, true);
+        capabilities.setCapability(CapabilityType.ForSeleniumServer.ONLY_PROXYING_SELENIUM_TRAFFIC, true);
+        System.setProperty("http.nonProxyHosts", "localhost");
+        capabilities.setCapability("proxy", proxy);
+
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         System.setProperty("webdriver.chrome.driver", "/opt/webdriver/chrome/chromedriver");
         WebDriver webDriver = new ChromeDriver(capabilities);
-        webDriver.manage().window().maximize();
         return webDriver;
     }
 
